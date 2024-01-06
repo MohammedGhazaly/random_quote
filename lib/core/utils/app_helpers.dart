@@ -28,7 +28,6 @@ class AppHelpers {
   }
 
   static void showToast({
-    required BuildContext context,
     required String msg,
     Color? color,
     ToastGravity? gravity,

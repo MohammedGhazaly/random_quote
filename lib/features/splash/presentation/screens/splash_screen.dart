@@ -10,7 +10,9 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: InkWell(
           onTap: () {
-            AppHelpers.showToast(context: context, msg: "Error happened");
+            AppHelpers.showToast(
+              msg: "Error happened",
+            );
           },
           child: Text("Show dialog"),
         ),
