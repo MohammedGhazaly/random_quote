@@ -11,4 +11,6 @@ class HexColorConverter extends Color {
   }
 
   HexColorConverter(final String hexColor) : super(_getColorFromHex(hexColor));
+  // "#451BAB"     : Input
+  // 0xFF451BAB :  Out put
 }
