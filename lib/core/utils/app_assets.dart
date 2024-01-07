@@ -1,5 +1,5 @@
 const String imgPath = "assets/images/";
 
 class AppImages {
-  String quoteImage = "${imgPath}quote";
+  static String quoteImage = "${imgPath}quote.png";
 }

@@ -14,6 +14,7 @@ class RandomQuoteApp extends StatelessWidget {
       title: AppStrings.appName,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.mainTheme(),
+      // home: MyCustomSplashScreen(),
     );
   }
 }
