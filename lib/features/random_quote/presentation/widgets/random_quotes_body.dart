@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quote_gen_clean_arc/core/utils/app_colors.dart';
+import 'package:quote_gen_clean_arc/features/random_quote/presentation/widgets/quote_type.dart';
 
 class RandomQuotesBody extends StatelessWidget {
   const RandomQuotesBody({super.key});
@@ -10,7 +11,7 @@ class RandomQuotesBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: const EdgeInsets.all(16),
@@ -21,11 +22,12 @@ class RandomQuotesBody extends StatelessWidget {
               ),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   "“Above all, don't lie to yourself. The man who lies to himself and listens to his own lie comes to a point that he cannot distinguish the truth within him, or around him, and so loses all respect for himself and for others. And having no respect he ceases to love.”",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     color: Colors.white,
                   ),
                 ),
@@ -37,6 +39,18 @@ class RandomQuotesBody extends StatelessWidget {
                     fontWeight: FontWeight.w600,
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Wrap(
+                  runSpacing: 10,
+                  spacing: 10,
+                  children: [
+                    QuoteType(),
+                    QuoteType(),
+                    QuoteType(),
+                  ],
+                )
               ],
             ),
           ),
