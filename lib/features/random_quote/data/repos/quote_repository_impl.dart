@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:quote_gen_clean_arc/core/error/exceptions.dart';
 import 'package:quote_gen_clean_arc/core/error/failures.dart';
 import 'package:quote_gen_clean_arc/core/network/network_info.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/data/data_sources/random_quote_local_data_source.dart';
@@ -19,8 +20,21 @@ class QuoteRepositoryImpl implements QuoteRepository {
   @override
   Future<Either<Failures, QuoteModel>> getRandomQuote() async {
     if (await networkInfo.isConnected) {
-      final QuoteModel quoteModel =
-          await randomQuoteRemoteDataSource.getRandomQuote();
-    } else {}
+      try {
+        final QuoteModel quoteModel =
+            await randomQuoteRemoteDataSource.getRandomQuote();
+        return Right(quoteModel);
+      } on ServerExceptions {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final QuoteModel cachedRandomQuote =
+            await randomQuoteLocalDataSource.getLastCachedRandomQuote();
+        return Right(cachedRandomQuote);
+      } on CacheExceptions {
+        return Left(CacheFailure());
+      }
+    }
   }
 }
