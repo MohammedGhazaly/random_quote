@@ -2,11 +2,15 @@ import 'package:dartz/dartz.dart';
 import 'package:quote_gen_clean_arc/core/error/failures.dart';
 import 'package:quote_gen_clean_arc/core/usecases/usecase.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/domain/entities/quote_entity.dart';
+import 'package:quote_gen_clean_arc/features/random_quote/domain/repos/quote_repository.dart';
 
 class GetRandomQuote implements UseCase<QuoteEntity, NoParam> {
+  final QuoteRepository quoteRepository;
+
+  GetRandomQuote({required this.quoteRepository});
   @override
   Future<Either<Failures, QuoteEntity>> call(NoParam params) {
-    throw UnimplementedError();
+    return quoteRepository.getRandomQuote();
   }
 
   // In case we use arguments
