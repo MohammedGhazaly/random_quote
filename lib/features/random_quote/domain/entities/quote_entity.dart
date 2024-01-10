@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class QuoteEntity extends Equatable {
+class QuoteEntity {
   final String content;
   final String author;
   final List<String> tags;
@@ -10,8 +10,4 @@ class QuoteEntity extends Equatable {
     required this.author,
     required this.tags,
   });
-
-  @override
-  // TODO: implement props
-  List<Object?> get props => [content, author];
 }
