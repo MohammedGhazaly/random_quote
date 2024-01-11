@@ -4,4 +4,6 @@ class AppStrings {
   static const String splashScreenImageText = "Built using Clean architicture";
   static const String appFontFamily = "Tajawal";
   static const String cacheKey = "CACHED_RANDOM_QUOTE";
+  static const String contentTypeKey = "Content-Type";
+  static const String applicationJson = "application/json";
 }
