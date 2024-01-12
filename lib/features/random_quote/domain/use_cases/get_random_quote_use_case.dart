@@ -4,10 +4,10 @@ import 'package:quote_gen_clean_arc/core/usecases/usecase.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/domain/entities/quote_entity.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/domain/repos/quote_repository.dart';
 
-class GetRandomQuote implements UseCase<QuoteEntity, NoParam> {
+class GetRandomQuoteUseCase implements UseCase<QuoteEntity, NoParam> {
   final QuoteRepository quoteRepository;
 
-  GetRandomQuote({required this.quoteRepository});
+  GetRandomQuoteUseCase({required this.quoteRepository});
   @override
   Future<Either<Failures, QuoteEntity>> call(NoParam params) {
     return quoteRepository.getRandomQuote();
