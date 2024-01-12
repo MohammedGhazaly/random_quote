@@ -10,7 +10,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
   );
   static const styleMedium20 = TextStyle(
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: FontWeight.w500,
+  );
+  static const styleSemiBold24 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
   );
 }
