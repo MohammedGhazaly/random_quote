@@ -17,6 +17,7 @@ class RandomQuoteCubit extends Cubit<RandomQuoteStates> {
     Either<Failures, QuoteEntity> response = await getRandomQuoteUseCase.call(
       NoParam(),
     );
+    print("aaaaaaaaa");
     response.fold((failure) {
       emit(RandomQuoteFailure(errorMessage: _mapFailureToString(failure)));
     }, (quote) {

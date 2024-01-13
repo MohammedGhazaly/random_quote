@@ -3,7 +3,8 @@ import 'package:quote_gen_clean_arc/core/utils/app_colors.dart';
 import 'package:quote_gen_clean_arc/core/utils/app_styles.dart';
 
 class QuoteErrorWidget extends StatelessWidget {
-  const QuoteErrorWidget({super.key});
+  final String errorMessage;
+  const QuoteErrorWidget({super.key, required this.errorMessage});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class QuoteErrorWidget extends StatelessWidget {
         ),
         //
         Text(
-          "Something went wrong",
+          errorMessage,
           style: AppTextStyles.styleSemiBold24,
           textAlign: TextAlign.center,
         ),

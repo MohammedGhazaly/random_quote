@@ -7,6 +7,7 @@ class AppStrings {
   static const String contentTypeKey = "Content-Type";
   static const String applicationJson = "application/json";
   static const String serverFailure = "Server Failure";
-  static const String cacheFailure = "Cache Failure";
+  static const String cacheFailure =
+      "Cache Failure, (this could happen if you run the app for the first time and there is no internet)";
   static const String unExpectedError = "Unexpected Error";
 }

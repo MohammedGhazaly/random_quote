@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:http/http.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:quote_gen_clean_arc/core/network/network_info.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/data/data_sources/random_quote_local_data_source.dart';
@@ -12,50 +13,55 @@ import "package:http/http.dart" as http;
 
 final serviceLocator = GetIt.instance;
 
-void init() async {
+Future<void> init() async {
+  final shared = await SharedPreferences.getInstance();
+
   //! Features
   // BLOCS
   // كده كل مااستعمله فانا بكون من انستنس
   serviceLocator.registerFactory<RandomQuoteCubit>(() {
-    return RandomQuoteCubit(getRandomQuoteUseCase: serviceLocator());
+    return RandomQuoteCubit(
+        getRandomQuoteUseCase: serviceLocator<GetRandomQuoteUseCase>());
   });
   // Use Cases
   serviceLocator.registerLazySingleton<GetRandomQuoteUseCase>(() {
-    return GetRandomQuoteUseCase(quoteRepository: serviceLocator());
+    return GetRandomQuoteUseCase(
+        quoteRepository: serviceLocator<QuoteRepository>());
   });
   // Repos
   serviceLocator.registerLazySingleton<QuoteRepository>(() {
     return QuoteRepositoryImpl(
-        networkInfo: serviceLocator(),
-        randomQuoteLocalDataSource: serviceLocator(),
-        randomQuoteRemoteDataSource: serviceLocator());
+        networkInfo: serviceLocator<NetworkInfo>(),
+        randomQuoteLocalDataSource:
+            serviceLocator<RandomQuoteLocalDataSource>(),
+        randomQuoteRemoteDataSource:
+            serviceLocator<RandomQuoteRemoteDataSource>());
   });
   // Data Sources
   serviceLocator.registerLazySingleton<RandomQuoteLocalDataSource>(() {
     return RandomQuoteLocalDataSourceImpl(
-      sharedPreferences: serviceLocator(),
+      sharedPreferences: serviceLocator<SharedPreferences>(),
     );
   });
   serviceLocator.registerLazySingleton<RandomQuoteRemoteDataSource>(() {
     return RandomQuoteRemoteDataSourceImpl(
-      client: serviceLocator(),
+      client: serviceLocator<http.Client>(),
     );
   });
   // !Core
   serviceLocator.registerLazySingleton<NetworkInfo>(() {
     return NetworkInfoImpl(
-      connectionChecker: serviceLocator(),
+      connectionChecker: serviceLocator<InternetConnectionChecker>(),
     );
   });
   // External
-  final shared = await SharedPreferences.getInstance();
   serviceLocator.registerLazySingleton<SharedPreferences>(() {
     return shared;
   });
-  serviceLocator.registerLazySingleton(() {
-    return http.Client;
+  serviceLocator.registerLazySingleton<http.Client>(() {
+    return http.Client();
   });
-  serviceLocator.registerLazySingleton(() {
+  serviceLocator.registerLazySingleton<InternetConnectionChecker>(() {
     return InternetConnectionChecker();
   });
 }

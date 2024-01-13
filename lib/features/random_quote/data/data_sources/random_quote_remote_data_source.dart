@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:quote_gen_clean_arc/core/api/api_constants.dart';
 import 'package:quote_gen_clean_arc/core/error/exceptions.dart';
-import 'package:quote_gen_clean_arc/core/utils/app_strings.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/data/models/quote_model.dart';
 import "package:http/http.dart" as http;
 
@@ -16,11 +15,12 @@ class RandomQuoteRemoteDataSourceImpl implements RandomQuoteRemoteDataSource {
   RandomQuoteRemoteDataSourceImpl({required this.client});
   @override
   Future<QuoteModel> getRandomQuote() async {
+    print(ApiConstants.randomQuoteEndPoint);
     final response = await client.get(
-        Uri.parse(
-          ApiConstants.randomQuoteEndPoint,
-        ),
-        headers: {AppStrings.contentTypeKey: AppStrings.applicationJson});
+      Uri.parse(
+        ApiConstants.randomQuoteEndPoint,
+      ),
+    );
 
     if (response.statusCode == 200) {
       return QuoteModel.fromJson(jsonDecode(response.body));

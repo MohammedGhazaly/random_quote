@@ -10,6 +10,7 @@ import 'package:quote_gen_clean_arc/features/random_quote/data/data_sources/rand
 import 'package:quote_gen_clean_arc/features/random_quote/data/repos/quote_repository_impl.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/domain/use_cases/get_random_quote_use_case.dart';
 import 'package:quote_gen_clean_arc/features/random_quote/presentation/cubit/random_quote_cubit.dart';
+import 'package:quote_gen_clean_arc/locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RandomQuoteApp extends StatelessWidget {
@@ -19,8 +20,8 @@ class RandomQuoteApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) {
-          return RandomQuoteCubit();
+        BlocProvider<RandomQuoteCubit>(create: (context) {
+          return serviceLocator.get<RandomQuoteCubit>()..getRandomQuote();
         })
       ],
       child: MaterialApp(

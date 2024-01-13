@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:quote_gen_clean_arc/core/error/exceptions.dart';
 import 'package:quote_gen_clean_arc/core/error/failures.dart';
@@ -24,6 +26,7 @@ class QuoteRepositoryImpl implements QuoteRepository {
       try {
         final QuoteModel quoteModel =
             await randomQuoteRemoteDataSource.getRandomQuote();
+
         await randomQuoteLocalDataSource.cacheLastFetchedQuote(quoteModel);
         return Right(quoteModel);
       } on ServerExceptions {
