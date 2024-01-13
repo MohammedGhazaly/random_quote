@@ -17,6 +17,16 @@ class DioConsumer implements ApiConsumer {
       ..baseUrl = ApiConstants.baseUrl
       ..responseType = ResponseType.plain
       ..followRedirects = false;
+    dio.interceptors.add(
+      LogInterceptor(
+        responseBody: true,
+        error: true,
+        requestHeader: true,
+        responseHeader: true,
+        request: true,
+        requestBody: true,
+      ),
+    );
   }
   @override
   Future<dynamic> del(
